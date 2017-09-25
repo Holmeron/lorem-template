@@ -1,0 +1,11 @@
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap";
+@import './fonts.scss';
+
+// helper rules
+@import './colors.scss';
+@import './icons.scss';
+@import './backgrounds.scss';
+
+// pages rules
+@import './pages/home-page';

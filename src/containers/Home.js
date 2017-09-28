@@ -5,7 +5,7 @@ import { LoremGenerator } from '../components/LoremGenerator';
 
 // Home page component
 const HomePage = () => (
-  <div className="home-page jumbotron center">
+  <div className="home-page">
     <LoremGenerator />
   </div>
 );

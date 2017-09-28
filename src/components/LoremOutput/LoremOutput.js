@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
 
+require('./LoremOutput.scss');
+
 class LoremOutput extends Component {
 
  componentDidMount() {
@@ -12,12 +14,17 @@ class LoremOutput extends Component {
   render() {
     const {output} = this.props;
     return (
-      <div>
+      <div className="lorem-output">
         <ul>
             {
               output ?
                 output.map((text,index)=>
-                  <li key={ index }>{text}</li>
+                  text ?
+                    text.map((line,lineIndex)=>
+
+                      <li key={ lineIndex }>{line}</li>
+                    )
+                  : null
                 )
               : null
             }

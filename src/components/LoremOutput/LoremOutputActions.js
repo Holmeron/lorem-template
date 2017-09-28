@@ -3,22 +3,23 @@
  * @memberof! module:LoremOutput#
  * @name ActionsTypes
  * @alias ActionsTypes
- * @property {constant} SUBMIT submit
+ * @property {constant} CHANGE change
  */
 
  export const types = {
-    SUBMIT : 'LoremOutput/SUBMIT',
+   CHANGE : 'LoremForm/CHANGE'
 };
 
+
 /**
- * LoremOutput submit
- * @function <i>LoremOutput</i> <strong>submit</strong>
- * @memberof! module:LoremOutput#
+ * LoremForm changedFormData
+ * @function <i>LoremForm</i> <strong>changedFormData</strong>
+ * @memberof! module:LoremForm#
  * @returns {object}
  */
-export const submit = (data) => {
+export const changedFormData = (formData) => {
     return {
-        type: types.SUBMIT,
-        data
+        type: types.CHANGE,
+        formData
     }
 };

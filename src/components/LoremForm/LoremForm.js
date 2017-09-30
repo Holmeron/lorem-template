@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
-
-import LoremOutputActions from '../LoremOutput';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 
 import Grid from 'material-ui/Grid';
 import Switch from 'material-ui/Switch';
 import TextField from 'material-ui/TextField';
+
+import {LoremOutputActions} from '../LoremOutput';
+
 
 class LoremForm extends Component {
 
  componentDidMount() {
   }
 
-  onFormChange(){
-    const { form, changedFormData } = this.props;
-    console.log('form : ',form);
-    changedFormData(form);
+  onFormChange(e,val){
+    const { loremForm, changedFormData } = this.props;
+    changedFormData(loremForm);
   }
 
   onSubmit(e){
+
     e.preventDefault();
   }
 
   render() {
-    const {form} = this.props;
+    const {loremForm} = this.props;
     const styles= {
       toggle: {
         marginBottom: 16,
@@ -35,11 +37,13 @@ class LoremForm extends Component {
 
           <Grid container>
               <Grid item md={6}>
-                <label>Random order ?</label>
+              <label htmlFor="isShuffled">Random order ?</label>
               </Grid>
               <Grid item md={6}>
-                  <Switch
-                    defaultValue={form.isShuffled}
+                  <Field
+                    name="isShuffled"
+                    component="input"
+                    type="checkbox"
                     onChange={this.onFormChange.bind(this)}
                   />
               </Grid>
@@ -50,7 +54,7 @@ class LoremForm extends Component {
                 <label>Number of paragraph</label>
               </Grid>
               <Grid item md={6}>
-                  <input type="number" value={form.loremAmount} onChange={this.onFormChange.bind(this)} />
+                <Field name="loremAmount" component="input" type="number" onChange={this.onFormChange.bind(this)} />
               </Grid>
           </Grid>
       </form>
@@ -58,16 +62,28 @@ class LoremForm extends Component {
   }
 }
 
+LoremForm = reduxForm({
+  form: 'loremForm'
+})(LoremForm);
+
 const mapStateToProps = (state) => {
+  const selector = formValueSelector('loremForm');
+  const { isShuffled, loremAmount } = selector(state, 'isShuffled', 'loremAmount');
+  const loremForm = {
+    isShuffled,
+    loremAmount
+  }
+
   return {
-    form : state.LoremForm.form
+    loremForm : state.LoremForm.form
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     changedFormData: (data) => {
-      dispatch(LoremOutputActions.changedFormData(data))
+      console.log('dispatching ',data);
+      return dispatch(LoremOutputActions.changedFormData(data))
     }
   }
 }

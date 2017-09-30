@@ -2,7 +2,7 @@ import * as types from '../../actions/rootActionsTypes';
 
 export default function (state = {
     form : {
-      isShuffled : false,
+      isShuffled : 'false',
       loremAmount : 3
     }
   }, action) {

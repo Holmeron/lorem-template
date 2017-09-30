@@ -7,17 +7,18 @@
  */
 
  export const types = {
-   CHANGE : 'LoremForm/CHANGE'
+   CHANGE : 'LoremOutput/CHANGE'
 };
 
 
 /**
  * LoremForm changedFormData
- * @function <i>LoremForm</i> <strong>changedFormData</strong>
+ * @function <i>LoremOutput</i> <strong>changedFormData</strong>
  * @memberof! module:LoremForm#
  * @returns {object}
  */
 export const changedFormData = (formData) => {
+
     return {
         type: types.CHANGE,
         formData

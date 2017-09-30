@@ -1,4 +1,4 @@
-import * as types from '../../actions/rootActionsTypes';
+import { types as LoremFormTypes } from './LoremGeneratorActions';
 
 export default function (state = {}, action) {
   switch (action.type) {

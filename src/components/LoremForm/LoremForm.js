@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 
+
 import Grid from 'material-ui/Grid';
 import Switch from 'material-ui/Switch';
 import TextField from 'material-ui/TextField';
 
+import LoremFormReducer from './LoremFormReducer';
 import {LoremOutputActions} from '../LoremOutput';
 
 
@@ -15,14 +17,8 @@ class LoremForm extends Component {
  componentDidMount() {
   }
 
-  onFormChange(e,val){
-    const { loremForm, changedFormData } = this.props;
-    changedFormData(loremForm);
-  }
+  onChange(e){
 
-  onSubmit(e){
-
-    e.preventDefault();
   }
 
   render() {
@@ -33,7 +29,7 @@ class LoremForm extends Component {
       }
     }
     return (
-      <form className="lorem-form" ref="loremForm" onSubmit={this.onSubmit}>
+      <form className="lorem-form" ref="loremForm">
 
           <Grid container>
               <Grid item md={6}>
@@ -44,7 +40,7 @@ class LoremForm extends Component {
                     name="isShuffled"
                     component="input"
                     type="checkbox"
-                    onChange={this.onFormChange.bind(this)}
+                    onChange={this.onChange}
                   />
               </Grid>
           </Grid>
@@ -54,7 +50,7 @@ class LoremForm extends Component {
                 <label>Number of paragraph</label>
               </Grid>
               <Grid item md={6}>
-                <Field name="loremAmount" component="input" type="number" onChange={this.onFormChange.bind(this)} />
+                <Field name="loremAmount" component="input" type="number" onChange={this.onChange}/>
               </Grid>
           </Grid>
       </form>
@@ -62,25 +58,17 @@ class LoremForm extends Component {
   }
 }
 
-LoremForm = reduxForm({
-  form: 'loremForm'
-})(LoremForm);
 
 const mapStateToProps = (state) => {
-  const selector = formValueSelector('loremForm');
-  const { isShuffled, loremAmount } = selector(state, 'isShuffled', 'loremAmount');
-  const loremForm = {
-    isShuffled,
-    loremAmount
-  }
 
   return {
-    loremForm : state.LoremForm.form
+    initialValues: state.LoremForm.form,
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    load: LoremFormReducer,
     changedFormData: (data) => {
       console.log('dispatching ',data);
       return dispatch(LoremOutputActions.changedFormData(data))
@@ -88,7 +76,16 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(
+LoremForm = reduxForm({
+  form: 'loremForm',
+  onChange: (values,dispatch)=>{
+    dispatch(LoremOutputActions.changedFormData(values))
+  },
+})(LoremForm);
+
+LoremForm = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(LoremForm);
+
+export default LoremForm;

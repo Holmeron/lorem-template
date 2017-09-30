@@ -1,13 +1,13 @@
-import * as types from '../../actions/rootActionsTypes';
+import { types as LoremOutputTypes } from './LoremOutputActions';
 import LoremOutputController from './LoremOutputController';
 
 export default function (state = {
     output : LoremOutputController.getDefaultJsonData()
   }, action) {
   switch (action.type) {
-    case types.CHANGE:
+    case LoremOutputTypes.CHANGE:
       const output = LoremOutputController.getJsonData(action.formData);
-      console.log('outp',output);
+
       return {
         ...state,
 

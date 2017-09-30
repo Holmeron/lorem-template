@@ -1,4 +1,4 @@
-import * as types from '../../actions/rootActionsTypes';
+import { types as LoremFormTypes } from './LoremFormActions';
 
 export default function (state = {
     form : {

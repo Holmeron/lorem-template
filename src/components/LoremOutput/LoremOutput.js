@@ -35,6 +35,7 @@ class LoremOutput extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state.LoremOutput.output)
   return {
     output : state.LoremOutput.output
   }

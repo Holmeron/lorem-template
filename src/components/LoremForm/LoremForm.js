@@ -50,7 +50,7 @@ class LoremForm extends Component {
                 <label>Number of paragraph</label>
               </Grid>
               <Grid item md={6}>
-                <Field name="loremAmount" component="input" type="number" onChange={this.onChange}/>
+                <Field name="loremAmount" component="input" type="number" min="1" onChange={this.onChange}/>
               </Grid>
           </Grid>
       </form>

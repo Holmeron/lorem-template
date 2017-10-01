@@ -7,10 +7,9 @@ export default function (state = {
   switch (action.type) {
     case LoremOutputTypes.CHANGE:
       const output = LoremOutputController.getJsonData(action.formData);
-
       return {
         ...state,
-
+        output
       }
     default:
       return state;

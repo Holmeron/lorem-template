@@ -7,25 +7,31 @@ class LoremOutputController{
       return rawJson[0].text;
   }
   getJsonData(formData){
-    let jsonData = this.getDefaultJsonData()
-    formData = this.shuffleData(formData.isShuffled,jsonData);
-    formData = this.getParagraph(formData.loremAmount,jsonData);
-    return formData;
+      let jsonData = this.getDefaultJsonData()
+      jsonData = this.shuffleData(formData.isShuffled,jsonData);
+      jsonData = this.getParagraph(formData.loremAmount,jsonData);
+      return jsonData;
   }
   shuffleData(isShuffled,jsonData){
-    if(isShuffled !== 'true') return jsonData;
+      if(isShuffled !== 'true') return jsonData;
 
-    for (let i = jsonData.length; i; i--) {
-        let j = Math.floor(Math.random() * i);
-        [jsonData[i - 1], jsonData[j]] = [jsonData[j], jsonData[i - 1]];
-    }
-    return jsonData;
+        var currentIndex = array.length, temporaryValue, randomIndex;
+
+        while (0 !== currentIndex) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+        return array;
   }
   getParagraph(amount,jsonData){
-    if(amount && jsonData.length > amount){
-      jsonData = jsonData.slice(0,amount);
-    }
-    return jsonData;
+      if(amount && jsonData.length > amount){
+          jsonData = jsonData.slice(0,amount);
+      }
+      return jsonData;
   }
 }
 

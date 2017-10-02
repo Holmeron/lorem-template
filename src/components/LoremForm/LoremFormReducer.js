@@ -2,7 +2,8 @@ import { types as LoremFormTypes } from './LoremFormActions';
 
 export default function (state = {
     form : {
-      isShuffled : 'false',
+      loremShuffle : false,
+      loremTitle : false,
       loremAmount : 3
     }
   }, action) {

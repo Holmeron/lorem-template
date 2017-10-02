@@ -2,34 +2,47 @@ import appService from '../../services/appService';
 
 class LoremOutputController{
   getDefaultJsonData() {
-      const rawJson =  appService.getJsonData();
-      const data = rawJson;
-      return rawJson[0].text;
+      const rawJson =  new appService().getJsonData();
+      return rawJson;
   }
   getJsonData(formData){
-      let jsonData = this.getDefaultJsonData()
-      jsonData = this.shuffleData(formData.isShuffled,jsonData);
+      let jsonData = this.getDefaultJsonData();
+      jsonData = this.shuffleData(formData.loremShuffle,jsonData);
+      jsonData = this.addTitles(formData.loremTitle,jsonData);
       jsonData = this.getParagraph(formData.loremAmount,jsonData);
-      return jsonData;
+      return jsonData.text;
   }
-  shuffleData(isShuffled,jsonData){
-      if(isShuffled !== 'true') return jsonData;
+  shuffleData(loremShuffle,jsonData){
+      if(loremShuffle !== true) return jsonData;
 
-        var currentIndex = array.length, temporaryValue, randomIndex;
+        let currentIndex = jsonData.text.length, temporaryValue, randomIndex;
 
         while (0 !== currentIndex) {
           randomIndex = Math.floor(Math.random() * currentIndex);
           currentIndex -= 1;
 
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
+          temporaryValue = jsonData.text[currentIndex];
+          jsonData.text[currentIndex] = jsonData.text[randomIndex];
+          jsonData.text[randomIndex] = temporaryValue;
         }
-        return array;
+        return jsonData;
+  }
+  addTitles(loremTitle,jsonData){
+    console.log('in',jsonData);
+
+      if(loremTitle !== true) return jsonData;
+      let newJsonData = [];
+
+      for(let i = 0;i < jsonData.text.length;i++){
+        newJsonData.push(jsonData.title,jsonData.text[i])
+      }
+      jsonData.text = newJsonData;
+      console.log(jsonData);
+      return jsonData;
   }
   getParagraph(amount,jsonData){
-      if(amount && jsonData.length > amount){
-          jsonData = jsonData.slice(0,amount);
+      if(amount && jsonData.text.length > amount){
+          jsonData.text = jsonData.text.slice(0,amount);
       }
       return jsonData;
   }

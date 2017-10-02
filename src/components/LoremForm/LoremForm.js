@@ -33,11 +33,11 @@ class LoremForm extends Component {
 
           <Grid container>
               <Grid item md={6}>
-              <label htmlFor="isShuffled">Random order ?</label>
+              <label htmlFor="loremShuffle">Random order ?</label>
               </Grid>
               <Grid item md={6}>
                   <Field
-                    name="isShuffled"
+                    name="loremShuffle"
                     component="input"
                     type="checkbox"
                     onChange={this.onChange}
@@ -52,6 +52,19 @@ class LoremForm extends Component {
               <Grid item md={6}>
                 <Field name="loremAmount" component="input" type="number" min="1" onChange={this.onChange}/>
               </Grid>
+          </Grid>
+
+          <Grid container>
+              <Grid item md={6}>
+                <label>With titles ?</label>
+              </Grid>
+              <Grid item md={6}>
+              <Field
+                name="loremTitle"
+                component="input"
+                type="checkbox"
+                onChange={this.onChange}
+              />              </Grid>
           </Grid>
       </form>
     )
@@ -77,7 +90,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 LoremForm = reduxForm({
-  form: 'loremForm',
+  form: 'LoremForm',
   onChange: (values,dispatch)=>{
     dispatch(LoremOutputActions.changedFormData(values))
   },

@@ -46,6 +46,18 @@ class LoremOutputController{
       }
       return jsonData;
   }
+  copyText(text){
+    console.log('text',text);
+    text.select();
+    try {
+      const successful = document.execCommand('copy');
+      const msg = successful ? 'successful' : 'unsuccessful';
+      text.deselect();
+    } catch (err) {
+      console.log('Oops, unable to copy');
+    }
+
+  }
 }
 
 const LoremOutput = new LoremOutputController();

@@ -8,7 +8,7 @@
 
  export const types = {
    CHANGE : 'LoremOutput/CHANGE',
-   SNACKBAR_OPEN : 'LoremOutput/SNACKBAR_OPEN',
+   COPY_TEXT : 'LoremOutput/COPY_TEXT',
    SNACKBAR_CLOSE : 'LoremOutput/SNACKBAR_CLOSE'
 };
 
@@ -28,15 +28,16 @@ export const changedFormData = (formData) => {
 };
 
 /**
- * LoremForm snackBarButtonOpen
- * @function <i>LoremOutput</i> <strong>snackBarButtonOpen</strong>
+ * LoremForm copyText
+ * @function <i>LoremOutput</i> <strong>copyText</strong>
  * @memberof! module:LoremForm#
  * @returns {object}
  */
-export const snackBarButtonOpen = () => {
+export const copyText = (text) => {
 
     return {
-        type: types.SNACKBAR_OPEN
+        type: types.COPY_TEXT,
+        text
     }
 };
 

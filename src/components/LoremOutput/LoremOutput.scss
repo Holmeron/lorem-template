@@ -7,4 +7,16 @@
   .copy-icon{
     float: right;
   }
+  textarea{
+    height: 80vh;
+    width: 100%;
+    outline: none;
+    resize: none;
+    border:none;
+    -moz-scrollbars-none
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+  }
 }

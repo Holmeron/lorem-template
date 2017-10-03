@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
-import { Scrollbars } from 'react-custom-scrollbars';
 
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
@@ -29,8 +28,20 @@ class LoremOutput extends Component {
       return <span>Text copied to clipboard !</span>;
   }
 
+  getTextToCopy(){
+    const {onCopyText} = this.props;
+    const {output} = this.refs;
+    onCopyText(output);
+  }
+  getOutputText(){
+    const {output} = this.props;
+    if(output){
+      return output.map((text)=>text.join('\n'))
+    }
+  }
+
   render() {
-    const {output,snackBarOpen,onSnackBarButtonClicked,closeSnackBar} = this.props;
+    const {output,snackBarOpen,onCopyText,closeSnackBar} = this.props;
     return (
       <div className="lorem-output">
           <Paper>
@@ -39,7 +50,7 @@ class LoremOutput extends Component {
                         <Typography>
                             Output
                         </Typography>
-                        <IconButton className="copy-icon" onClick={onSnackBarButtonClicked}>
+                        <IconButton className="copy-icon" onClick={()=>{this.getTextToCopy()}}>
                           <Assignment />
                         </IconButton>
                         <Snackbar
@@ -52,22 +63,7 @@ class LoremOutput extends Component {
 
                     </Toolbar>
                 </AppBar>
-                <Scrollbars style={{ height: '80vh'}}>
-                    <ul>
-                        {
-                          output ?
-                            output.map((text,index)=>
-                              text ?
-                                text.map((line,lineIndex)=>
-
-                                  <li key={ lineIndex }>{line}</li>
-                                )
-                              : null
-                            )
-                          : null
-                        }
-                    </ul>
-                </Scrollbars>
+                <textarea ref="output" value={this.getOutputText()}></textarea>
           </Paper>
       </div>
     )
@@ -82,12 +78,10 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSnackBarButtonClicked: () => {
-      console.log('dispatch');
-      return dispatch(LoremOutputActions.snackBarButtonOpen())
+    onCopyText: (text) => {
+      return dispatch(LoremOutputActions.copyText(text))
     },
     closeSnackBar: () => {
-      console.log('close');
       return dispatch(LoremOutputActions.snackBarButtonClose())
     }
   }

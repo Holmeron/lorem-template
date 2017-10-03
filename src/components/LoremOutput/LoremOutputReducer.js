@@ -12,14 +12,13 @@ export default function (state = {
         ...state,
         output
       }
-    case LoremOutputTypes.SNACKBAR_OPEN:
-    console.log('open');
+    case LoremOutputTypes.COPY_TEXT:
+      LoremOutputController.copyText(action.text);
       return {
         ...state,
         snackBarOpen: true
       }
     case LoremOutputTypes.SNACKBAR_CLOSE:
-    console.log('snackBarButtonClose');
       return {
         ...state,
         snackBarOpen: false

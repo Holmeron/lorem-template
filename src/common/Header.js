@@ -13,7 +13,7 @@ const Header = () => (
   <AppBar position="static">
     <Toolbar>
       <Typography type="title" color="inherit">
-          <Link to="/" className="navbar-brand">Template</Link>
+          <Link to="/" className="navbar-brand">Lorem Template</Link>
       </Typography>
     </Toolbar>
   </AppBar>

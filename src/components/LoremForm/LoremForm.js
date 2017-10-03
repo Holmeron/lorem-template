@@ -92,7 +92,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     load: LoremFormReducer,
     changedFormData: (data) => {
-      console.log('dispatching ',data);
       return dispatch(LoremOutputActions.changedFormData(data))
     }
   }

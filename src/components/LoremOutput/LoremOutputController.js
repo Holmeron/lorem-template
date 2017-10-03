@@ -51,13 +51,11 @@ class LoremOutputController{
 
       if(tags !== true) return jsonData;
       let newJsonData = [];
-      console.log(jsonData);
       for(let i=0;i<jsonData.text.length;i++){
         jsonData.text[i] = jsonData.text[i].map((line)=>{
           return `<p>${line}</p>`;
         })
       }
-      console.log('output',jsonData);
       return jsonData;
   }
   copyText(text){
@@ -68,7 +66,6 @@ class LoremOutputController{
       const msg = successful ? 'successful' : 'unsuccessful';
       text.deselect();
     } catch (err) {
-      console.log('Oops, unable to copy');
     }
 
   }

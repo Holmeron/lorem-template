@@ -35,9 +35,15 @@ class LoremOutput extends Component {
   }
   getOutputText(){
     const {output} = this.props;
-    console.log(output);
     if(output){
-      return output.map((text)=> Array.isArray(text) ? text.join('\n') : '\n'+text+'\n').join('');
+      return output.map((text)=> {
+        if(Array.isArray(text)){
+          if(text.length > 1) return text.join('\n');
+          else return '\n'+text[0]+'\n';
+        }else{
+          return '\n'+text+'\n';
+        }
+      }).join('');
     }
   }
 

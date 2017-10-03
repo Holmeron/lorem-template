@@ -4,7 +4,8 @@ export default function (state = {
     form : {
       loremShuffle : false,
       loremTitle : false,
-      loremAmount : 3
+      loremAmount : 3,
+      loremTags : false
     }
   }, action) {
   switch (action.type) {

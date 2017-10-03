@@ -56,6 +56,15 @@ class LoremForm extends Component {
 
           <Grid container>
               <Grid item md={6}>
+                <label>With html tags ?</label>
+              </Grid>
+              <Grid item md={6}>
+                <Field name="loremTags" component="input" type="checkbox" onChange={this.onChange}/>
+              </Grid>
+          </Grid>
+
+          <Grid container>
+              <Grid item md={6}>
                 <label>With titles ?</label>
               </Grid>
               <Grid item md={6}>

@@ -8,8 +8,9 @@ class LoremOutputController{
   getJsonData(formData){
       let jsonData = this.getDefaultJsonData();
       jsonData = this.shuffleData(formData.loremShuffle,jsonData);
-      jsonData = this.addTitles(formData.loremTitle,jsonData);
       jsonData = this.getParagraph(formData.loremAmount,jsonData);
+      jsonData = this.getHtmlTags(formData.loremTags,jsonData);
+      jsonData = this.addTitles(formData.loremTitle, formData.loremTags,jsonData);
       return jsonData.text;
   }
   shuffleData(loremShuffle,jsonData){
@@ -27,17 +28,17 @@ class LoremOutputController{
         }
         return jsonData;
   }
-  addTitles(loremTitle,jsonData){
-    console.log('in',jsonData);
+  addTitles(loremTitle,loremTags,jsonData){
 
       if(loremTitle !== true) return jsonData;
       let newJsonData = [];
 
       for(let i = 0;i < jsonData.text.length;i++){
-        newJsonData.push(jsonData.title,jsonData.text[i])
+        const jsonDataTitle = loremTags === true ? `<h4>${jsonData.title}</h4>` : `${jsonData.title}`;
+        newJsonData.push(jsonDataTitle);
+        newJsonData.push(jsonData.text[i]);
       }
       jsonData.text = newJsonData;
-      console.log(jsonData);
       return jsonData;
   }
   getParagraph(amount,jsonData){
@@ -46,8 +47,21 @@ class LoremOutputController{
       }
       return jsonData;
   }
+  getHtmlTags(tags,jsonData){
+
+      if(tags !== true) return jsonData;
+      let newJsonData = [];
+      console.log(jsonData);
+      for(let i=0;i<jsonData.text.length;i++){
+        jsonData.text[i] = jsonData.text[i].map((line)=>{
+          return `<p>${line}</p>`;
+        })
+      }
+      console.log('output',jsonData);
+      return jsonData;
+  }
   copyText(text){
-    console.log('text',text);
+
     text.select();
     try {
       const successful = document.execCommand('copy');
